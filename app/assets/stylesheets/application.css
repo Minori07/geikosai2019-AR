@@ -1,0 +1,191 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+:root{
+  --maingreen: #419e9d;
+  --mainred: #c74159;
+  --maingray: #c6cac7;
+  --mainnavy: #143265;
+  --subblue:#4088b1;
+  --subyellow:#ebd45d;
+  --subpink:#da7e82;
+}
+
+body{
+	background-color: var(--mainnavy);
+	height: 100vh;
+	color: var(--maingray);
+	margin: 0;
+	padding: 0;
+	font-family: 'TsukuARdGothic-Regular',sans-serif;
+}
+
+a{
+	text-decoration: none;
+	color: var(--maingray);
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.top img{
+	width: 100vw;
+	margin-bottom: 5vh;
+}
+
+.navi {
+	width: 80vw;
+	padding: 15vh 0 15vh 0;
+	background-image: url(maru.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.start{
+	background-color: var(--maingray);
+	color: var(--mainnavy);
+	width: 50vw;
+	height: 5vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: solid 5px;
+    border-image: linear-gradient(to right, var(--mainred) 0%, var(--subyellow) 50%, var(--maingreen) 100%);
+    border-image-slice: 1;
+}
+
+.gks2019 img{
+	width: 90vw;
+	margin: 10vh 0 5vh 0;
+}
+
+header{
+	background-color: var(--mainnavy);
+	border-bottom: solid 1px black;
+	display: flex;
+}
+
+header img{
+	height: 3vh;
+	margin:  2vh 0 1vh 5vw;
+}
+
+footer{
+	background-color: var(--mainnavy);
+	width: 100vw;
+	position: absolute;
+	bottom: 0;
+	height: 11vh;
+	display: flex;
+	border-top: solid 1px black;
+}
+
+.return img{
+	width: 10vw;
+	position: relative;
+	left: 5vw;
+	top: 4vh;
+}
+.get{
+	width: 15vw;
+	height: 15vw;
+	position: relative;
+	left: 31vw;
+	top: 1vh;
+}
+.comp_get{
+	width: 15vw;
+	height: 15vw;
+	position: relative;
+	left: 42vw;
+	top: 1vh;
+}
+
+.user_name{
+	position: absolute;
+	top: 3vw;
+	right: 5vw;
+}
+
+.stamps{
+}
+
+.st_img img{
+	width: 35vw;
+}
+
+.st1{
+	position: relative;
+	left: -20vw;
+}
+.st2{
+	position: relative;
+	right: -20vw;
+	top: -7vh;
+}
+.st3{
+	position: relative;
+	left: -20vw;
+	top: -14vh;
+}
+.st4{
+	position: relative;
+	right: -20vw;
+	top: -21vh;
+}
+.st5{
+	position: relative;
+	left: -20vw;
+	top: -28vh;
+}
+.comp img{
+	width:70vw;
+	height: 70vw;
+	position: relative;
+	top: -20vh;
+	left: -2vw;
+}
+
+.go_top img{
+	width: 25vw;
+	position: relative;
+	top: -10vh;
+}
+
+.ar{
+	width: 100vw;
+	height:83vh;
+}
+
+#camera{
+	width: 100vw;
+	height:83vh;
+}
+
+#img{
+	width: 100vw;
+	height:83vh;
+}
+
+video{
+	width: 100vw;
+	height: 83vh;
+	object-fit: cover;
+	margin: auto;
+    overflow: hidden;
+}

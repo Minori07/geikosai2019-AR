@@ -1,0 +1,128 @@
+<div class="ar" id="ar" style="margin:0px; overflow:hidden;">
+	 <a-assets>
+
+    <a-asset-item id="cheese_mtl" src="cheese.mtl"></a-asset-item>
+    <a-asset-item id="cheese_obj" src="cheese.obj"></a-asset-item>
+
+    <a-asset-item id="moji_cheese_mtl" src="moji_cheese.mtl"></a-asset-item>
+    <a-asset-item id="moji_cheese_obj" src="moji_cheese.obj"></a-asset-item>
+
+  </a-assets>
+  <!-- AR.jsのデバックとA-FrameのVRボタンを非表示 -->
+  <a-scene embedded arjs="debugUIEnabled: false" vr-mode-ui="enabled: false" width="50vw" height="50vh">
+  	<canvas id=“vid_canvas” width=“100vw” height=“100vh”></canvas>
+
+    <!-- ここからマーカーの宣言と表示する3Dオブジェクトの指定 -->
+    <a-marker type="pattern" url="geikosai_marker1.patt" registerevents>
+      <a-obj-model id="cheese" src="#cheese_obj" mtl="#cheese_mtl" position="0 0 0" rotation="-90 0 0" scale="0 0 0">
+          <a-animation attribute="scale" to="0.02 0.02 0.02" dur="1000" begin="markerfound" end="markerlost">
+          </a-animation>
+          <a-animation attribute="rotation" to="-90 360 0" dur="1500" begin="markerfound" end="markerlost">
+          </a-animation>
+      </a-obj-model>
+
+      <a-obj-model id="moji_cheese" src="#moji_cheese_obj" mtl="#moji_cheese_mtl" position="0 0 1" rotation="-90 0 0" scale="0 0 0">
+          <a-animation attribute="scale" to="0.01 0.01 0.01" dur="1000" begin="markerfound" end="markerlost">
+          </a-animation>
+          <a-animation attribute="rotation" to="-90 -360 0" dur="1500" begin="markerfound" end="markerlost">
+          </a-animation>
+      </a-obj-model>
+    </a-marker>
+
+    <!-- カメラの起動 -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</div>
+<footer>
+	<%= link_to image_tag('return.png'), stamps_url, class: "return" %>
+</footer>
+<img src="" id="result" />
+<a href="" id="ss" download="html_ss.png"><%= image_tag "get.png", class: "comp_get" %></a>
+
+
+
+  <script>
+    //ロードされた際の処理として実施：
+    window.onload = function(){
+
+      //HTML内に画像を表示
+      html2canvas(document.getElementById("ar"),{
+        onrendered: function(canvas){
+          //imgタグのsrcの中に、html2canvasがレンダリングした画像を指定する。
+          var imgData = canvas.toDataURL();
+        }
+      });
+
+      //ボタンを押下した際にダウンロードする画像を作る
+      html2canvas(document.body,{
+        onrendered: function(canvas){
+          //aタグのhrefにキャプチャ画像のURLを設定
+          var imgData = canvas.toDataURL();
+          document.getElementById("ss").href = imgData;
+        }
+      });
+
+    }
+
+    var _callbackId ;
+	//AR画面のサイズ指定
+	var _windowSize = 400;
+	 
+	//requestanimationflameで繰り返す
+	function loopFunc ( timeStamp ) {
+	var videoImage = new Image();
+	//映像が映し出されているvideoタグを取得
+	var video = document.querySelector('video');
+	 
+	//入力のvideo映像をcanvasに変換
+	videoImage = video;
+	var videoCnv = $('#vid_canvas');
+	var videoCtx = videoCnv[0].getContext('2d');
+	 
+	//合成先のcanvasを左右反転
+	videoCtx.transform(–1, 0, 0, 1, _windowSize, 0);
+	//入力画像の中央位置を正方形に切り抜くためのマージンを計算。
+	var widMargin = (video.videoWidth – _windowSize) / 2;
+	var heiMargin = (video.videoHeight – _windowSize) /2;
+	//キャプチャーしたカメラ映像の画像を表示
+	videoCtx.drawImage(videoImage,widMargin,heiMargin,_windowSize,_windowSize,0,0,_windowSize,_windowSize);
+	//キャプチャしたARモデルを表示
+	var arScene = document.querySelector(".a-canvas");
+	videoCtx.drawImage(arScene,0,0,_windowSize,_windowSize);
+	videoCtx.transform(–1, 0, 0, 1, _windowSize, 0);
+	_callbackId = requestAnimationFrame( loopFunc ) ;
+	}
+	 
+	//上記のrequestanimationframeが実行され動画がAR動画が描画される
+	function play(){
+	loopFunc();
+	};
+
+    AFRAME.registerComponent('registerevents', {
+        init: function () {
+            var marker = this.el;
+            var TouchPanel = document.getElementById("ar");
+
+            // マーカーを検出したイベントの登録
+            marker.addEventListener('markerFound', function () {
+                var markerId = marker.id;
+                console.log('markerFound', markerId);
+
+                // アニメーションの開始
+                document.querySelector('#cheese').emit('markerfound');
+                document.querySelector('#moji_cheese').emit('markerfound');
+            });
+
+            // マーカーを見失ったイベントの登録
+            marker.addEventListener('markerLost', function () {
+                var markerId = marker.id;
+                console.log('markerLost', markerId);
+
+                // アニメーションの停止
+                document.querySelector('#cheese').emit('markerlost');
+                document.querySelector('#moji_cheese').emit('markerlost');
+            });
+
+        }
+    });
+  </script>

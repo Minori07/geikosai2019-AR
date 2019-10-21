@@ -1,0 +1,73 @@
+<% get_num = 0 %>
+<% i = 1 %>
+<% st = [false,false,false,false,false] %>
+<div class="container" id = "">
+	<p style="width: 70vw; margin-top: 8vh;">スタンプ５つ集めたらcompleteをタップできるよ！映像スタジオで取得できるよ。</p>
+<%= image_tag "camera_nav" ,style: "width: 70vw; margin: 5vh 0 5vh 0"%>
+<div class="stamps">
+<% @stamps.each do | stamp | %>
+	<% if stamp.get %>
+		<% st[i-1] = true %>
+		<% get_num += 1 %>
+	<% end %>
+	<% i += 1 %>
+<% end %>
+
+<div class="st_img st1">
+	<% if st[0] %>
+		<%= image_tag "get1" %>
+	<% else %>
+		<%= link_to image_tag("st1"), edit_stamp_path(@stamps[0]) %>
+	<% end %>
+</div>
+<div class="st_img st2">
+	<% if st[1] %>
+		<%= image_tag "get2" %>
+	<% else %>
+		<%= link_to image_tag("st2"), edit_stamp_path(@stamps[1]) %>
+	<% end %>
+</div>
+<div class="st_img st3">
+	<% if st[2] %>
+		<%= image_tag "get3" %>
+	<% else %>
+		<%= link_to image_tag("st3"), edit_stamp_path(@stamps[2]) %>
+	<% end %>
+</div>
+<div class="st_img st4">
+	<% if st[3] %>
+		<%= image_tag "get4" %>
+	<% else %>
+		<%= link_to image_tag("st4"), edit_stamp_path(@stamps[3]) %>
+	<% end %>
+</div>
+<div class="st_img st5">
+	<% if st[4] %>
+		<%= image_tag "get5" %>
+	<% else %>
+		<%= link_to image_tag("st5"), edit_stamp_path(@stamps[4]) %>
+	<% end %>
+</div>
+</div>
+
+<div class="comp">
+	<% if get_num == 5 %>
+		<%= link_to image_tag("comp.png"), stamps_comp_path %>
+		<% get_num += 1 %>
+	<% else %>
+		<%= image_tag "comp_no.png" %>
+	<% end %>
+</div>
+<div class="go_top">
+	<%= link_to image_tag("page_top") ,{ anchor: "top" }%>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+     // #で始まるアンカーをクリックした場合に処理
+    $('.go_top').click(function() {
+        $('html,body').animate({ scrollTop: 0,scrollLeft: 0 }, '1');
+    });
+});
+</script>
+</div>

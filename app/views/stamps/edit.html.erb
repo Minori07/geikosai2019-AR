@@ -1,0 +1,15 @@
+<% a = 0 %>
+<div class="ar"></div>
+<footer>
+<%= link_to image_tag('return.png'), stamps_url, class: "return" %>
+<%= form_for(@stamp) do |f| %>
+  <% if a == 1 %>
+    <%= f.hidden_field :get, value: true %>
+  <% else %>
+    <%= f.hidden_field :get, value: false %>
+  <% end %>
+  <%= button_tag type: :submit do %>
+      <%= image_tag "get.png", class: "get" %>
+  <% end %>
+<% end %>
+</footer>
