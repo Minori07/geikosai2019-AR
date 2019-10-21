@@ -14,5 +14,3 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-//= require jquery #ない人追加
-//= require serviceworker-companion #追加
