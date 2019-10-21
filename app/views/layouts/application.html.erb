@@ -20,15 +20,14 @@
       <%= image_tag "head.png" %>
       <div class="user_name"><%= current_user.email.split('@')[0] %></div>
     </header>
-    <footer>
-      <% if user_signed_in? %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      <% end %>
-    </footer>
     <% end %>
 <!--     <p class="notice"><%= notice %></p> -->
 <!--     <p class="alert"><%= alert %></p> -->
     <%= yield %>
-
+<!--     <footer>
+      <% if user_signed_in? %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <% end %>
+    </footer> -->
   </body>
 </html>
