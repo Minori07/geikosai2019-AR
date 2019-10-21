@@ -12,11 +12,6 @@
   <link rel="manifest" href="/manifest.json" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <%= stylesheet_link_tag "application", :media => "all" %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
-<!-- A-Frameを読み込み -->
-<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
-<!-- AR.jsを読み込み -->
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
   </head>
 
   <body>
@@ -25,14 +20,15 @@
       <%= image_tag "head.png" %>
       <div class="user_name"><%= current_user.email.split('@')[0] %></div>
     </header>
+    <footer>
+      <% if user_signed_in? %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <% end %>
+    </footer>
     <% end %>
 <!--     <p class="notice"><%= notice %></p> -->
 <!--     <p class="alert"><%= alert %></p> -->
     <%= yield %>
-<!--     <footer>
-      <% if user_signed_in? %>
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-      <% end %>
-    </footer> -->
+
   </body>
 </html>
