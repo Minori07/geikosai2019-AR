@@ -1,8 +1,8 @@
 <% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
 {
-  "name": "My Progressive Rails App",
-  "short_name": "Progressive",
-  "start_url": "/",
+  "name": "Geikosai2019 AR",
+  "short_name": "geiko2019 AR",
+  "start_url": "/users/sign_up",
   "icons": [
   <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
     {
@@ -12,8 +12,8 @@
     }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
   <% end %>
   ],
-  "theme_color": "#000000",
-  "background_color": "#FFFFFF",
+  "theme_color": "#143265",
+  "background_color": "#143265",
   "display": "fullscreen",
   "orientation": "portrait"
 }
