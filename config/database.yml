@@ -19,8 +19,10 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-  
+
 production:
+
   <<: *default
-  adapter: pg
-  database: db/production.pg
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
